@@ -9,7 +9,7 @@ Batcher.grid.Resources = function(config) {
             action: 'mgr/resource/getList'
             ,thread: config.thread
         }
-        ,fields: ['id','pagetitle','template','templatename','deleted','published','hidemenu','menu']
+        ,fields: ['id','pagetitle','template','templatename','deleted','published','hidemenu']
         ,paging: true
         ,autosave: false
         ,remoteSort: true
@@ -27,12 +27,12 @@ Batcher.grid.Resources = function(config) {
             ,sortable: true
             ,width: 100
         },{
-            header: _('template')
+            header: _('batcher.template')
             ,dataIndex: 'templatename'
             ,sortable: true
             ,width: 120
         },{
-            header: _('published')
+            header: _('batcher.published')
             ,dataIndex: 'published'
             ,sortable: true
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
@@ -119,6 +119,31 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
     ,_renderUrl: function(v,md,rec) {
         return '<a href="'+rec.data.url+'" target="_blank">'+rec.data.pagetitle+'</a>';
     }
+    ,_showMenu: function(g,ri,e) {
+        e.stopEvent();
+        e.preventDefault();
+        this.menu.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        this.menu.removeAll();
+
+        var m = [];
+        if (this.menu.record.menu) {
+            m = this.menu.record.menu;
+            if (m.length > 0) {
+                this.addContextMenuItem(m);
+                this.menu.show(e.target);
+            }
+        } else {
+            var z = this.getBatchMenu();
+
+            for (var zz=0;zz < z.length;zz++) {
+                this.menu.add(z[zz]);
+            }
+            this.menu.show(e.target);
+        }
+    }
     ,getSelectedAsList: function() {
         var sels = this.getSelectionModel().getSelections();
         if (sels.length <= 0) return false;
@@ -157,10 +182,7 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
 
-        var r = {
-            resources: cs
-        };
-
+        var r = {resources: cs};
         if (!this.changeParentWindow) {
             this.changeParentWindow = MODx.load({
                 xtype: 'batcher-window-change-parent'
@@ -178,90 +200,116 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
         this.changeParentWindow.show(e.target);
         return true;
     }
+    ,changeTemplate: function(btn,e) {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        var r = {resources: cs};
+        if (!this.changeTemplateWindow) {
+            this.changeTemplateWindow = MODx.load({
+                xtype: 'batcher-window-change-template'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                       this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.changeTemplateWindow.setValues(r);
+        this.changeTemplateWindow.show(e.target);
+        return true;
+    }
 
     ,getBatchMenu: function() {
-        var m = [];
-        m.push({
+        var bm = [];
+        bm.push({
             text: _('batcher.toggle')
-            ,menu: [{
-                text: _('batcher.published')
-                ,handler: function(btn,e) {
-                    this.batchAction('publish',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.unpublished')
-                ,handler: function(btn,e) {
-                    this.batchAction('unpublish',btn,e);
-                }
-                ,scope: this
-            },'-',{
-                text: _('batcher.hidemenu')
-                ,handler: function(btn,e) {
-                    this.batchAction('hidemenu',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.unhidemenu')
-                ,handler: function(btn,e) {
-                    this.batchAction('unhidemenu',btn,e);
-                }
-                ,scope: this
-            },'-',{
-                text: _('batcher.cacheable')
-                ,handler: function(btn,e) {
-                    this.batchAction('cacheable',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.uncacheable')
-                ,handler: function(btn,e) {
-                    this.batchAction('cacheable',btn,e);
-                }
-                ,scope: this
-            },'-',{
-                text: _('batcher.searchable')
-                ,handler: function(btn,e) {
-                    this.batchAction('searchable',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.unsearchable')
-                ,handler: function(btn,e) {
-                    this.batchAction('unsearchable',btn,e);
-                }
-                ,scope: this
-            },'-',{
-                text: _('batcher.richtext')
-                ,handler: function(btn,e) {
-                    this.batchAction('richtext',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.unrichtext')
-                ,handler: function(btn,e) {
-                    this.batchAction('unrichtext',btn,e);
-                }
-                ,scope: this
-            },'-',{
-                text: _('batcher.deleted')
-                ,handler: function(btn,e) {
-                    this.batchAction('delete',btn,e);
-                }
-                ,scope: this
-            },{
-                text: _('batcher.undeleted')
-                ,handler: function(btn,e) {
-                    this.batchAction('undelete',btn,e);
-                }
-                ,scope: this
-            }]
+            ,menu: {
+                items: [{
+                    text: _('batcher.published')
+                    ,handler: function(btn,e) {
+                        this.batchAction('publish',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.unpublished')
+                    ,handler: function(btn,e) {
+                        this.batchAction('unpublish',btn,e);
+                    }
+                    ,scope: this
+                },'-',{
+                    text: _('batcher.hidemenu')
+                    ,handler: function(btn,e) {
+                        this.batchAction('hidemenu',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.unhidemenu')
+                    ,handler: function(btn,e) {
+                        this.batchAction('unhidemenu',btn,e);
+                    }
+                    ,scope: this
+                },'-',{
+                    text: _('batcher.cacheable')
+                    ,handler: function(btn,e) {
+                        this.batchAction('cacheable',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.uncacheable')
+                    ,handler: function(btn,e) {
+                        this.batchAction('cacheable',btn,e);
+                    }
+                    ,scope: this
+                },'-',{
+                    text: _('batcher.searchable')
+                    ,handler: function(btn,e) {
+                        this.batchAction('searchable',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.unsearchable')
+                    ,handler: function(btn,e) {
+                        this.batchAction('unsearchable',btn,e);
+                    }
+                    ,scope: this
+                },'-',{
+                    text: _('batcher.richtext')
+                    ,handler: function(btn,e) {
+                        this.batchAction('richtext',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.unrichtext')
+                    ,handler: function(btn,e) {
+                        this.batchAction('unrichtext',btn,e);
+                    }
+                    ,scope: this
+                },'-',{
+                    text: _('batcher.deleted')
+                    ,handler: function(btn,e) {
+                        this.batchAction('delete',btn,e);
+                    }
+                    ,scope: this
+                },{
+                    text: _('batcher.undeleted')
+                    ,handler: function(btn,e) {
+                        this.batchAction('undelete',btn,e);
+                    }
+                    ,scope: this
+                }]
+            }
         },{
             text: _('batcher.change_parent')
             ,handler: this.changeParent
             ,scope: this
+        },{
+            text: _('batcher.change_template')
+            ,handler: this.changeTemplate
+            ,scope: this
         });
-        return m;
+        return bm;
     }
 });
 Ext.reg('batcher-grid-resource',Batcher.grid.Resources);
@@ -285,9 +333,33 @@ Batcher.window.ChangeParent = function(config) {
             ,name: 'parent'
             ,anchor: '90%'
         }]
-        ,keys: []
     });
     Batcher.window.ChangeParent.superclass.constructor.call(this,config);
 };
 Ext.extend(Batcher.window.ChangeParent,MODx.Window);
 Ext.reg('batcher-window-change-parent',Batcher.window.ChangeParent);
+
+Batcher.window.ChangeTemplate = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('batcher.change_template')
+        ,url: Batcher.config.connector_url
+        ,baseParams: {
+            action: 'mgr/resource/changetemplate'
+        }
+        ,width: 400
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'resources'
+        },{
+            xtype: 'modx-combo-template'
+            ,fieldLabel: _('batcher.template')
+            ,name: 'template'
+            ,hiddenName: 'template'
+            ,anchor: '90%'
+        }]
+    });
+    Batcher.window.ChangeTemplate.superclass.constructor.call(this,config);
+};
+Ext.extend(Batcher.window.ChangeTemplate,MODx.Window);
+Ext.reg('batcher-window-change-template',Batcher.window.ChangeTemplate);

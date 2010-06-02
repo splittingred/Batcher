@@ -47,16 +47,6 @@ foreach ($resources as $resource) {
     //$resourceArray['content'] = strip_tags(substr($resourceArray['content'],0,300));
 
     //$resourceArray['url'] = $resource->makeUrl();
-
-    $resourceArray['menu'] = array(
-        /*
-        array(
-            'text' => $modx->lexicon('delete'),
-            'handler' => 'this.deleteResource',
-        )
-         * 
-         */
-    );
     $list[]= $resourceArray;
 }
 return $this->outputArray($list,$count);
