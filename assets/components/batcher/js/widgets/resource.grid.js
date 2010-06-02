@@ -67,7 +67,7 @@ Batcher.grid.Resources = function(config) {
             }
         }
         ,tbar: [{
-            text: _('bulk_actions')
+            text: _('batcher.bulk_actions')
             ,menu: this.getBatchMenu()
         },'->',{
             xtype: 'modx-combo-template'

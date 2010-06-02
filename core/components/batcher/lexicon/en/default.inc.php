@@ -22,6 +22,7 @@
  * @package batcher
  */
 $_lang['batcher'] = 'Batcher';
+$_lang['batcher.bulk_actions'] = 'Bulk Actions';
 $_lang['batcher.cacheable'] = 'Cacheable';
 $_lang['batcher.change_authors'] = 'Change Authors';
 $_lang['batcher.change_dates'] = 'Change Dates';
