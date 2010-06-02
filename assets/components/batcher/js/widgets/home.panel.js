@@ -20,6 +20,7 @@ Batcher.panel.Home = function(config) {
             }
             ,items: [{
                 title: _('batcher')
+                ,tabTip: 'Batcher Batcher Batcher (mushroom mushroom!)'
                 ,defaults: { autoHeight: true }
                 ,items: [{
                     html: '<p>'+_('batcher.intro_msg')+'</p>'

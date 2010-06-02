@@ -9,7 +9,7 @@ Batcher.grid.Resources = function(config) {
             action: 'mgr/resource/getList'
             ,thread: config.thread
         }
-        ,fields: ['id','pagetitle','template','templatename','deleted','published','hidemenu']
+        ,fields: ['id','pagetitle','template','templatename','alias','deleted','published','createdon','editedon','hidemenu']
         ,paging: true
         ,autosave: false
         ,remoteSort: true
@@ -20,10 +20,15 @@ Batcher.grid.Resources = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
-            ,width: 80
+            ,width: 60
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
+            ,sortable: true
+            ,width: 100
+        },{
+            header: _('alias')
+            ,dataIndex: 'alias'
             ,sortable: true
             ,width: 100
         },{
@@ -220,6 +225,26 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
         this.changeTemplateWindow.show(e.target);
         return true;
     }
+    ,changeDates: function(btn,e) {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        var r = {resources: cs};
+        if (!this.changeDatesWindow) {
+            this.changeDatesWindow = MODx.load({
+                xtype: 'batcher-window-change-dates'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                       this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.changeDatesWindow.setValues(r);
+        this.changeDatesWindow.show(e.target);
+        return true;
+    }
 
     ,getBatchMenu: function() {
         var bm = [];
@@ -308,6 +333,10 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
             text: _('batcher.change_template')
             ,handler: this.changeTemplate
             ,scope: this
+        },{
+            text: _('batcher.change_dates')
+            ,handler: this.changeDates
+            ,scope: this
         });
         return bm;
     }
@@ -363,3 +392,63 @@ Batcher.window.ChangeTemplate = function(config) {
 };
 Ext.extend(Batcher.window.ChangeTemplate,MODx.Window);
 Ext.reg('batcher-window-change-template',Batcher.window.ChangeTemplate);
+
+
+Batcher.window.ChangeDates = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('batcher.change_dates')
+        ,url: Batcher.config.connector_url
+        ,baseParams: {
+            action: 'mgr/resource/changedates'
+        }
+        ,width: 500
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'resources'
+        },{
+            xtype: 'datetimefield'
+            ,fieldLabel: _('batcher.createdon')
+            ,name: 'createdon'
+            ,hiddenName: 'createdon'
+            ,anchor: '90%'
+            ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
+            ,dateWidth: 120
+            ,timeWidth: 120
+        },{
+            xtype: 'datetimefield'
+            ,fieldLabel: _('batcher.editedon')
+            ,name: 'editedon'
+            ,hiddenName: 'editedon'
+            ,anchor: '90%'
+            ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
+            ,dateWidth: 120
+            ,timeWidth: 120
+        },{
+            xtype: 'datetimefield'
+            ,fieldLabel: _('batcher.pub_date')
+            ,name: 'pub_date'
+            ,hiddenName: 'pub_date'
+            ,anchor: '90%'
+            ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
+            ,dateWidth: 120
+            ,timeWidth: 120
+        },{
+            xtype: 'datetimefield'
+            ,fieldLabel: _('batcher.unpub_date')
+            ,name: 'unpub_date'
+            ,hiddenName: 'unpub_date'
+            ,anchor: '90%'
+            ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
+            ,dateWidth: 120
+            ,timeWidth: 120
+        }]
+    });
+    Batcher.window.ChangeDates.superclass.constructor.call(this,config);
+};
+Ext.extend(Batcher.window.ChangeDates,MODx.Window);
+Ext.reg('batcher-window-change-dates',Batcher.window.ChangeDates);

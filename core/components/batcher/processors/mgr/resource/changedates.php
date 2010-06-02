@@ -1,6 +1,6 @@
 <?php
 /**
- * Change parent for multiple resources
+ * Change dates for multiple resources
  *
  * @package batcher
  * @subpackage processors
@@ -10,12 +10,6 @@ if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->
 if (empty($scriptProperties['resources'])) {
     return $modx->error->failure($modx->lexicon('batcher.resources_err_ns'));
 }
-/* get parent */
-if (empty($scriptProperties['parent'])) {
-    return $modx->error->failure($modx->lexicon('batcher.parent_err_ns'));
-}
-$parentResource = $modx->getObject('modResource',$scriptProperties['parent']);
-if (empty($parentResource)) return $modx->error->failure($modx->lexicon('batcher.parent_err_nf'));
 
 /* iterate over resources */
 $resourceIds = explode(',',$scriptProperties['resources']);
@@ -23,7 +17,10 @@ foreach ($resourceIds as $resourceId) {
     $resource = $modx->getObject('modResource',$resourceId);
     if ($resource == null) continue;
 
-    $resource->set('parent',$scriptProperties['parent']);
+    if (!empty($scriptProperties['createdon'])) $resource->set('createdon',$scriptProperties['createdon']);
+    if (!empty($scriptProperties['editedon'])) $resource->set('editedon',$scriptProperties['editedon']);
+    if (!empty($scriptProperties['pub_date'])) $resource->set('pub_date',$scriptProperties['pub_date']);
+    if (!empty($scriptProperties['unpub_date'])) $resource->set('unpub_date',$scriptProperties['unpub_date']);
 
     if ($resource->save() === false) {
         
