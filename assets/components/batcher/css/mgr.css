@@ -1,0 +1,20 @@
+
+.batcher-resource-body {
+    padding: 10px 0 10px 20px;
+}
+
+
+.batcher-grid .batcher-unpublished,
+.batcher-grid .batcher-unpublished span,
+.batcher-grid .batcher-unpublished a {
+    color: gray;
+}
+.x-grid3-body .x-grid3-td-checker {
+    background-image: none !important;
+}
+
+
+.batcher-deleted, .batcher-deleted span, .batcher-deleted a,
+.batcher-grid .batcher-deleted, .batcher-grid .batcher-deleted span, .batcher-grid .batcher-deleted a {
+    color: red !important;
+}
