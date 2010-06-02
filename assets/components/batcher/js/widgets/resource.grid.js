@@ -225,6 +225,26 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
         this.changeTemplateWindow.show(e.target);
         return true;
     }
+    ,changeAuthors: function(btn,e) {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        var r = {resources: cs};
+        if (!this.changeAuthorsWindow) {
+            this.changeAuthorsWindow = MODx.load({
+                xtype: 'batcher-window-change-authors'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                       this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.changeAuthorsWindow.setValues(r);
+        this.changeAuthorsWindow.show(e.target);
+        return true;
+    }
     ,changeDates: function(btn,e) {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -337,6 +357,10 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
             text: _('batcher.change_dates')
             ,handler: this.changeDates
             ,scope: this
+        },{
+            text: _('batcher.change_authors')
+            ,handler: this.changeAuthors
+            ,scope: this
         });
         return bm;
     }
@@ -392,6 +416,44 @@ Batcher.window.ChangeTemplate = function(config) {
 };
 Ext.extend(Batcher.window.ChangeTemplate,MODx.Window);
 Ext.reg('batcher-window-change-template',Batcher.window.ChangeTemplate);
+
+
+Batcher.window.ChangeAuthors = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('batcher.change_authors')
+        ,url: Batcher.config.connector_url
+        ,baseParams: {
+            action: 'mgr/resource/changeauthors'
+        }
+        ,width: 400
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'resources'
+        },{
+            xtype: 'modx-combo-user'
+            ,fieldLabel: _('batcher.createdby')
+            ,name: 'createdby'
+            ,hiddenName: 'createdby'
+            ,anchor: '90%'
+        },{
+            xtype: 'modx-combo-user'
+            ,fieldLabel: _('batcher.editedby')
+            ,name: 'editedby'
+            ,hiddenName: 'editedby'
+            ,anchor: '90%'
+        },{
+            xtype: 'modx-combo-user'
+            ,fieldLabel: _('batcher.publishedby')
+            ,name: 'publishedby'
+            ,hiddenName: 'publishedby'
+            ,anchor: '90%'
+        }]
+    });
+    Batcher.window.ChangeAuthors.superclass.constructor.call(this,config);
+};
+Ext.extend(Batcher.window.ChangeAuthors,MODx.Window);
+Ext.reg('batcher-window-change-authors',Batcher.window.ChangeAuthors);
 
 
 Batcher.window.ChangeDates = function(config) {

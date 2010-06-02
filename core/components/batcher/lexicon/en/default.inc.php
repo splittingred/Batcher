@@ -23,11 +23,14 @@
  */
 $_lang['batcher'] = 'Batcher';
 $_lang['batcher.cacheable'] = 'Cacheable';
+$_lang['batcher.change_authors'] = 'Change Authors';
 $_lang['batcher.change_dates'] = 'Change Dates';
 $_lang['batcher.change_parent'] = 'Change Parent';
 $_lang['batcher.change_template'] = 'Change Template';
+$_lang['batcher.createdby'] = 'Created By';
 $_lang['batcher.createdon'] = 'Created On';
 $_lang['batcher.deleted'] = 'Deleted';
+$_lang['batcher.editedby'] = 'Edited By';
 $_lang['batcher.editedon'] = 'Edited On';
 $_lang['batcher.filter_by_template'] = 'Filter by Template';
 $_lang['batcher.hidemenu'] = 'Hidden from Menus';
@@ -38,6 +41,7 @@ $_lang['batcher.parent_err_nf'] = 'Parent not found.';
 $_lang['batcher.parent_err_ns'] = 'Parent not specified.';
 $_lang['batcher.pub_date'] = 'Publish Date';
 $_lang['batcher.published'] = 'Published';
+$_lang['batcher.publishedby'] = 'Published By';
 $_lang['batcher.richtext'] = 'Richtext Enabled';
 $_lang['batcher.searchable'] = 'Searchable';
 $_lang['batcher.template'] = 'Template';
@@ -51,4 +55,5 @@ $_lang['batcher.unpub_date'] = 'Unpublish Date';
 $_lang['batcher.unpublished'] = 'Unpublished';
 $_lang['batcher.unrichtext'] = 'Richtext Disabled';
 $_lang['batcher.unsearchable'] = 'Unsearchable';
+$_lang['batcher.user_err_nf'] = 'User not found.';
 
