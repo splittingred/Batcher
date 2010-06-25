@@ -2,7 +2,7 @@
 /**
  * Batcher
  *
- * Copyright 2010 by Shaun McCormick <shaun@collabpad.com>
+ * Copyright 2010 by Shaun McCormick <shaun@modxcms.com>
  *
  * This file is part of Batcher, a batch resource editing Extra.
  *
@@ -20,6 +20,13 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @package batcher
+ */
+/**
+ * Default English language translation
+ * 
+ * @package batcher
+ * @subpackage lexicon
+ * @language en
  */
 $_lang['batcher'] = 'Batcher';
 $_lang['batcher.bulk_actions'] = 'Bulk Actions';

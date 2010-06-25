@@ -2,7 +2,7 @@
 /**
  * Batcher
  *
- * Copyright 2010 by Shaun McCormick <shaun@collabpad.com>
+ * Copyright 2010 by Shaun McCormick <shaun@modxcms.com>
  *
  * This file is part of Batcher, a batch resource editing Extra.
  *

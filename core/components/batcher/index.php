@@ -2,7 +2,7 @@
 /**
  * Batcher
  *
- * Copyright 2010 by Shaun McCormick <shaun@collabpad.com>
+ * Copyright 2010 by Shaun McCormick <shaun@modxcms.com>
  *
  * This file is part of Batcher, a batch resource editing Extra.
  *
@@ -19,6 +19,9 @@
  * Batcher; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
+ * @package batcher
+ */
+/**
  * @package batcher
  */
 $o = include dirname(__FILE__).'/controllers/index.php';
