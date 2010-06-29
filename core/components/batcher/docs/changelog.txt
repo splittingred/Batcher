@@ -1,5 +1,9 @@
 Changelog for Batcher.
 
+Batcher 1.0.1
+================
+- Added French translation
+
 Batcher 1.0.0
 ================
 - Added Russian translation
