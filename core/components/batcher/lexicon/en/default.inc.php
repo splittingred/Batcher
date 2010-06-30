@@ -29,6 +29,7 @@
  * @language en
  */
 $_lang['batcher'] = 'Batcher';
+$_lang['batcher.action_err_ns'] = 'Please specify an action.';
 $_lang['batcher.bulk_actions'] = 'Bulk Actions';
 $_lang['batcher.cacheable'] = 'Cacheable';
 $_lang['batcher.change_authors'] = 'Change Authors';
@@ -50,6 +51,7 @@ $_lang['batcher.parent_err_ns'] = 'Parent not specified.';
 $_lang['batcher.pub_date'] = 'Publish Date';
 $_lang['batcher.published'] = 'Published';
 $_lang['batcher.publishedby'] = 'Published By';
+$_lang['batcher.resources_err_ns'] = 'Please select some Resources to perform that action on.';
 $_lang['batcher.richtext'] = 'Richtext Enabled';
 $_lang['batcher.searchable'] = 'Searchable';
 $_lang['batcher.template'] = 'Template';

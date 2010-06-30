@@ -2,6 +2,8 @@ Changelog for Batcher.
 
 Batcher 1.0.1
 ================
+- Fixed bug with changeDates due to Revo RC-3 changes
+- Added German translation
 - Added French translation
 
 Batcher 1.0.0

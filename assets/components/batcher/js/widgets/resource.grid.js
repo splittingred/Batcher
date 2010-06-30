@@ -469,7 +469,7 @@ Batcher.window.ChangeDates = function(config) {
             xtype: 'hidden'
             ,name: 'resources'
         },{
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('batcher.createdon')
             ,name: 'createdon'
             ,hiddenName: 'createdon'
@@ -479,7 +479,7 @@ Batcher.window.ChangeDates = function(config) {
             ,dateWidth: 120
             ,timeWidth: 120
         },{
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('batcher.editedon')
             ,name: 'editedon'
             ,hiddenName: 'editedon'
@@ -489,7 +489,7 @@ Batcher.window.ChangeDates = function(config) {
             ,dateWidth: 120
             ,timeWidth: 120
         },{
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('batcher.pub_date')
             ,name: 'pub_date'
             ,hiddenName: 'pub_date'
@@ -499,7 +499,7 @@ Batcher.window.ChangeDates = function(config) {
             ,dateWidth: 120
             ,timeWidth: 120
         },{
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('batcher.unpub_date')
             ,name: 'unpub_date'
             ,hiddenName: 'unpub_date'
