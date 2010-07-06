@@ -27,11 +27,18 @@
  * @package batcher
  * @subpackage controllers
  */
+
+if (empty($_REQUEST['template'])) return $modx->error->failure($modx->lexicon('batcher.template_err_ns'));
+$template = $modx->getObject('modTemplate',$_REQUEST['template']);
+if (empty($template)) return $modx->error->failure($modx->lexicon('batcher.template_err_nf'));
+
+$tj = $template->get(array('id','templatename','description'));
+$tj = $modx->toJSON($tj);
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() { Batcher.template = '.$tj.'; });</script>');
+
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/template.grid.js');
-$modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/resource.grid.js');
-$modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/home.panel.js');
-$modx->regClientStartupScript($batcher->config['jsUrl'].'sections/home.js');
-$output = '<div id="batcher-panel-home-div"></div>';
+$modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/template/template.tvs.panel.js');
+$modx->regClientStartupScript($batcher->config['jsUrl'].'sections/template/tvs.defaults.js');
+$output = '<div id="batcher-panel-template-tvs-div"></div>';
 
 return $output;

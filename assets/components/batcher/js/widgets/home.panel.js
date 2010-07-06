@@ -19,7 +19,7 @@ Batcher.panel.Home = function(config) {
                 return {activeTab:this.items.indexOf(this.getActiveTab())};
             }
             ,items: [{
-                title: _('batcher')
+                title: _('batcher.resources')
                 ,tabTip: 'Batcher Batcher Batcher (mushroom mushroom!)'
                 ,defaults: { autoHeight: true }
                 ,items: [{
@@ -28,6 +28,17 @@ Batcher.panel.Home = function(config) {
                     ,bodyStyle: 'padding: 10px'
                 },{
                     xtype: 'batcher-grid-resource'
+                    ,preventRender: true
+                }]
+            },{
+                title: _('batcher.templates')
+                ,defaults: { autoHeight: true }
+                ,items: [{
+                    html: '<p>'+_('batcher.templates.intro_msg')+'</p>'
+                    ,border: false
+                    ,bodyStyle: 'padding: 10px'
+                },{
+                    xtype: 'batcher-grid-template'
                     ,preventRender: true
                 }]
             }]

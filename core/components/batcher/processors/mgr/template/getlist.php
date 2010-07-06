@@ -22,7 +22,7 @@
  * @package batcher
  */
 /**
- * Get a list of resources
+ * Get a list of templates
  *
  * @package batcher
  * @subpackage processors
@@ -32,43 +32,35 @@ $isLimit = !empty($scriptProperties['limit']);
 $isCombo = !empty($scriptProperties['combo']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
-$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$sort = $modx->getOption('sort',$scriptProperties,'templatename');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
-$c = $modx->newQuery('modResource');
-$c->leftJoin('modTemplate','Template');
+$c = $modx->newQuery('modTemplate');
+$c->leftJoin('modCategory','Category');
 if (!empty($scriptProperties['search'])) {
     $c->where(array(
-        'pagetitle:LIKE' => '%'.$scriptProperties['search'].'%',
+        'templatename:LIKE' => '%'.$scriptProperties['search'].'%',
         'OR:description:LIKE' => '%'.$scriptProperties['search'].'%',
-        'OR:content:LIKE' => '%'.$scriptProperties['search'].'%',
-        'OR:id:LIKE' => '%'.$scriptProperties['search'].'%',
     ));
 }
-if (!empty($scriptProperties['template'])) {
-    $c->where(array(
-        'template' => $scriptProperties['template'],
-    ));
-}
-$count = $modx->getCount('modResource',$c);
-
-$c->select(array('modResource.*','Template.templatename'));
+$count = $modx->getCount('modTemplate',$c);
+$c->select(array(
+    'modTemplate.id',
+    'modTemplate.templatename',
+    'modTemplate.description',
+));
+$c->select('`Category`.`category` AS `category_name`');
 $c->sortby($sort,$dir);
 if ($isLimit) {
     $c->limit($limit,$start);
 }
-$resources = $modx->getCollection('modResource',$c);
-
+$templates = $modx->getCollection('modTemplate',$c);
+//echo $c->toSql();
 
 $list = array();
-foreach ($resources as $resource) {
-    if (!$resource->checkPolicy('list')) continue;
-    $resourceArray = $resource->toArray();
-    $resourceArray['hidemenu'] = (boolean)$resourceArray['hidemenu'];
-    unset($resourceArray['content']);
-    //$resourceArray['content'] = strip_tags(substr($resourceArray['content'],0,300));
-
-    //$resourceArray['url'] = $resource->makeUrl();
-    $list[]= $resourceArray;
+foreach ($templates as $template) {
+    $templateArray = $template->toArray();
+    $templateArray['category'] = $template->get('category_name');
+    $list[]= $templateArray;
 }
 return $this->outputArray($list,$count);
