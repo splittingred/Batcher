@@ -37,7 +37,7 @@ set_time_limit(0);
 define('PKG_NAME','Batcher');
 define('PKG_NAME_LOWER','batcher');
 define('PKG_VERSION','1.1.0');
-define('PKG_RELEASE','rc1');
+define('PKG_RELEASE','rc2');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';

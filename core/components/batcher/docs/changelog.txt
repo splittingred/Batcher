@@ -1,18 +1,19 @@
 Changelog for Batcher.
 
 Batcher 1.1.0
-================
+================================================================
+- Updated Russian translation
 - Added batch change TV default values for a Template
 - Added batch change TV values for all Resources in a Template
 - Added batch change Template category
 
 Batcher 1.0.1
-================
+================================================================
 - Fixed bug with changeDates due to Revo RC-3 changes
 - Added German translation
 - Added French translation
 
 Batcher 1.0.0
-================
+================================================================
 - Added Russian translation
 - Initial commit
