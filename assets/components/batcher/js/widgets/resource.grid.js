@@ -157,7 +157,7 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
         for (var i=0;i<sels.length;i++) {
             cs += ','+sels[i].data.id;
         }
-        cs = Ext.util.Format.substr(cs,1);
+        cs = cs.substr(1);
         return cs;
     }
     

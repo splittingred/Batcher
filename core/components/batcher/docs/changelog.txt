@@ -2,6 +2,7 @@ Changelog for Batcher.
 
 Batcher 1.1.0
 ================================================================
+- Added fix for bug with Firefox and batch editing
 - Updated Russian translation
 - Added batch change TV default values for a Template
 - Added batch change TV values for all Resources in a Template
