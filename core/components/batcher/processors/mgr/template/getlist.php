@@ -49,7 +49,9 @@ $c->select(array(
     'modTemplate.templatename',
     'modTemplate.description',
 ));
-$c->select('`Category`.`category` AS `category_name`');
+$c->select(array(
+    'category_name' => 'Category.category',
+));
 $c->sortby($sort,$dir);
 if ($isLimit) {
     $c->limit($limit,$start);

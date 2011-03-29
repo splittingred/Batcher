@@ -33,7 +33,6 @@ $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 Ext.onReady(function() {
     Batcher.config = '.$modx->toJSON($batcher->config).';
     Batcher.config.connector_url = "'.$batcher->config['connectorUrl'].'";
-    Batcher.request = '.$modx->toJSON($_GET).';
 });
 </script>');
 

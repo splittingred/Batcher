@@ -36,7 +36,9 @@ $tj = $template->get(array('id','templatename','description'));
 $tj = $modx->toJSON($tj);
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() { Batcher.template = '.$tj.'; });</script>');
 
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
+$managerUrl = $modx->getOption('manager_url');
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/template/template.tvs.panel.js');
 $modx->regClientStartupScript($batcher->config['jsUrl'].'sections/template/tvs.defaults.js');
 $output = '<div id="batcher-panel-template-tvs-div"></div>';

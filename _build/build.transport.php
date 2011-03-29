@@ -36,7 +36,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','Batcher');
 define('PKG_NAME_LOWER','batcher');
-define('PKG_VERSION','1.1.0');
+define('PKG_VERSION','1.1.1');
 define('PKG_RELEASE','pl');
 
 /* define sources */

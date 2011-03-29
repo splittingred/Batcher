@@ -58,7 +58,9 @@ $modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(fun
     Batcher.resources = "'.$ro.'";
 });</script>');
 
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
+$managerUrl = $modx->getOption('manager_url');
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($batcher->config['jsUrl'].'widgets/template/template.tvs.panel.js');
 $modx->regClientStartupScript($batcher->config['jsUrl'].'sections/template/tvs.js');
 $output = '<div id="batcher-panel-template-tvs-div"></div>';

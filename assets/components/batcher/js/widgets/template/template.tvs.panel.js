@@ -48,18 +48,19 @@ Batcher.panel.TemplateTVs = function(config) {
                     ,bodyStyle: 'padding: 15px;'
                     ,autoHeight: true
                     ,autoLoad: {
-                        url: MODx.config.manager_url
+                        url: Batcher.config.connectorUrl
                         ,method: 'GET'
                         ,params: {
-                           'a': MODx.action['resource/tvs']
-                           ,'class_key': 'modResource'
-                           ,'template': Batcher.template.id
-                           ,'resource': 0
-                           ,'showCheckbox': 1
+                           action: 'mgr/loadtvs'
+                           ,class_key: 'modResource'
+                           ,template: Batcher.template.id
+                           ,resource: 0
+                           ,showCheckbox: 1
                         }
                         ,scripts: true
                         ,callback: function() {
                             MODx.fireEvent('ready');
+                            
                         }
                         ,scope: this
                     }
