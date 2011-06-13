@@ -36,6 +36,7 @@ class Batcher {
             'chunksPath' => $corePath.'elements/chunks/',
             'modelPath' => $corePath.'model/',
             'processorsPath' => $corePath.'processors/',
+            'templatesPath' => $corePath.'templates/',
 
             'assetsUrl' => $assetsUrl,
             'connectorUrl' => $assetsUrl.'connector.php',

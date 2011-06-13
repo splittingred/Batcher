@@ -64,9 +64,9 @@ class BatcherControllerRequest extends modRequest {
     private function _respond() {
         $modx =& $this->modx;
         $batcher =& $this->batcher;
-        $viewHeader = include $this->batcher->config['corePath'].'controllers/mgr/header.php';
+        $viewHeader = include $this->batcher->config['corePath'].'controllers/header.php';
 
-        $f = $this->batcher->config['corePath'].'controllers/mgr/'.$this->action.'.php';
+        $f = $this->batcher->config['corePath'].'controllers/'.$this->action.'.php';
         if (file_exists($f)) {
             $viewOutput = include $f;
         } else {
