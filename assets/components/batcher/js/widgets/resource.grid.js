@@ -304,7 +304,7 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
                 },{
                     text: _('batcher.uncacheable')
                     ,handler: function(btn,e) {
-                        this.batchAction('cacheable',btn,e);
+                        this.batchAction('uncacheable',btn,e);
                     }
                     ,scope: this
                 },'-',{
