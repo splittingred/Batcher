@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="Batcher" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+</model>

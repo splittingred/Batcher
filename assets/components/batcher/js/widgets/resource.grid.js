@@ -80,7 +80,7 @@ Batcher.grid.Resources = function(config) {
         },{
             xtype: 'textfield'
             ,name: 'search'
-            ,id: 'batcher-search'
+            ,id: 'batcher-resource-search'
             ,emptyText: _('search')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -92,7 +92,7 @@ Batcher.grid.Resources = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'batcher-filter-clear'
+            ,id: 'batcher-resource-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -116,7 +116,7 @@ Ext.extend(Batcher.grid.Resources,MODx.grid.Grid,{
     	this.getStore().baseParams = {
             action: 'mgr/resource/getList'
     	};
-        Ext.getCmp('batcher-search').reset();
+        Ext.getCmp('batcher-resource-search').reset();
         Ext.getCmp('batcher-template').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();

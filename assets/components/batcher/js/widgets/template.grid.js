@@ -57,7 +57,7 @@ Batcher.grid.Templates = function(config) {
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
-            ,id: 'batcher-search'
+            ,id: 'batcher-template-search'
             ,emptyText: _('search')
             ,listeners: {
                 'change': {fn:this.search,scope:this}
@@ -69,7 +69,7 @@ Batcher.grid.Templates = function(config) {
             }
         },{
             xtype: 'button'
-            ,id: 'batcher-filter-clear'
+            ,id: 'batcher-template-filter-clear'
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this}
@@ -93,7 +93,7 @@ Ext.extend(Batcher.grid.Templates,MODx.grid.Grid,{
     	this.getStore().baseParams = {
             action: 'mgr/template/getList'
     	};
-        Ext.getCmp('batcher-search').reset();
+        Ext.getCmp('batcher-template-search').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }

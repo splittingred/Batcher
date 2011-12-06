@@ -26,6 +26,7 @@
  * @subpackage controllers
  */
 class BatcherTemplateTvdefaultsManagerController extends BatcherManagerController {
+    /** @var modTemplate $template */
     public $template;
     public function process(array $scriptProperties = array()) {
         if (empty($scriptProperties['template'])) return $this->failure($this->modx->lexicon('batcher.template_err_ns'));

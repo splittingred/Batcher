@@ -26,6 +26,7 @@
  * @subpackage controllers
  */
 class BatcherTemplateTvsManagerController extends BatcherManagerController {
+    /** @var modTemplate $template */
     public $template;
     public $resourcesOutput = array();
     

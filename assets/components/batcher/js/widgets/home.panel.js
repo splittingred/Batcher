@@ -3,13 +3,13 @@ Batcher.panel.Home = function(config) {
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
+        ,cls: 'container form-with-labels'
         ,items: [{
             html: '<h2>'+_('batcher')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 10px'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
             ,stateful: true
@@ -25,10 +25,11 @@ Batcher.panel.Home = function(config) {
                 ,items: [{
                     html: '<p>'+_('batcher.intro_msg')+'</p>'
                     ,border: false
-                    ,bodyStyle: 'padding: 10px'
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'batcher-grid-resource'
                     ,preventRender: true
+                    ,cls: 'main-wrapper'
                 }]
             },{
                 title: _('batcher.templates')
@@ -36,9 +37,10 @@ Batcher.panel.Home = function(config) {
                 ,items: [{
                     html: '<p>'+_('batcher.templates.intro_msg')+'</p>'
                     ,border: false
-                    ,bodyStyle: 'padding: 10px'
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'batcher-grid-template'
+                    ,cls: 'main-wrapper'
                     ,preventRender: true
                 }]
             }]

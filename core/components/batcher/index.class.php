@@ -31,6 +31,8 @@ class IndexManagerController extends modExtraManagerController {
 }
 
 abstract class BatcherManagerController extends modManagerController {
+    /** @var Batcher $batcher */
+    public $batcher;
     public function initialize() {
         $this->batcher = new Batcher($this->modx);
 
