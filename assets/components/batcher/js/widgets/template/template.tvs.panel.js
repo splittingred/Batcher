@@ -9,6 +9,7 @@ Batcher.panel.TemplateTVs = function(config) {
         ,fileUpload: true
         ,border: false
         ,baseCls: 'modx-formpanel'
+        ,cls: 'container form-with-labels'
         ,items: [{
             html: '<h2>'+_('template')+': '+Batcher.template.templatename+'</h2>'
             ,border: false
